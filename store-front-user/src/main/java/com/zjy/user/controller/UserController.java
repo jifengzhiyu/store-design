@@ -1,6 +1,7 @@
 package com.zjy.user.controller;
 
 import com.zjy.param.UserCheckParam;
+import com.zjy.pojo.User;
 import com.zjy.user.service.UserService;
 import com.zjy.user.service.UserService;
 import com.zjy.utils.R;
@@ -27,6 +28,15 @@ public class UserController {
     @Autowired
     private UserService userservice;
 
+    @PostMapping("register")
+    public R register(@RequestBody @Validated User user,BindingResult result){
+        if(result.hasErrors()){
+            return R.fail("参数异常，不可注册！");
+        }
+
+        return userservice.register(user);
+    }
+
     /**
      * @description  
      * @author  kaixin
@@ -45,6 +55,5 @@ public class UserController {
         }
 
         return userservice.check(userCheckParam);
-
     }
 }
