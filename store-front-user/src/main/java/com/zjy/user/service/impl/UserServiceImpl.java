@@ -132,8 +132,7 @@ public class UserServiceImpl implements UserService{
         log.info("UserServiceImpl.login业务结束，结果：{}","登录成功！");
 
         user.setPassword(null);
-        R.ok("登录成功！",user);
 
-        return null;
+        return R.ok("登录成功！",user);
     }
 }
