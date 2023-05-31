@@ -1,6 +1,7 @@
 package com.zjy.user.service;
 
 import com.zjy.param.UserCheckParam;
+import com.zjy.param.UserLoginParam;
 import com.zjy.pojo.User;
 import com.zjy.utils.R;
 
@@ -30,4 +31,13 @@ public interface UserService {
      * @return  com.zjy.utils.R 001 004
     */
     R register(User user);
+
+    /**
+     * @description  登录业务
+     * @author  kaixin
+     * @date    2023/5/31 22:11
+     * @param	userLoginParam 账号和密码已经校验 但是密码是明文！
+     * @return  com.zjy.utils.R
+    */
+    R login(UserLoginParam userLoginParam);
 }

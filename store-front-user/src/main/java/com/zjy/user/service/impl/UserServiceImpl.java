@@ -3,6 +3,7 @@ package com.zjy.user.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjy.constants.UserConstants;
 import com.zjy.param.UserCheckParam;
+import com.zjy.param.UserLoginParam;
 import com.zjy.pojo.User;
 import com.zjy.user.mapper.UserMapper;
 import com.zjy.user.service.UserService;
@@ -101,5 +102,38 @@ public class UserServiceImpl implements UserService{
         log.info("UserServiceImpl.registery业务结束，结果：{}","注册成功！)");
 
         return R.ok("注册成功！");
+    }
+
+    /**
+     * @return com.zjy.utils.R
+     * @description 登录业务
+     * @author kaixin
+     * @date 2023/5/31 22:11
+     * @param    userLoginParam 账号和密码已经校验 但是密码是明文！
+     */
+    @Override
+    public R login(UserLoginParam userLoginParam) {
+        //1.密码处理
+        String newPwd = MD5Util.encode((userLoginParam.getPassword() + UserConstants.USER_SLAT));
+
+        //2.数据库查询
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name",userLoginParam.getUserName());
+        queryWrapper.eq("password",newPwd);
+
+        User user = userMapper.selectOne(queryWrapper);
+
+        //3.结果处理
+        if(user == null){
+            log.info("UserServiceImpl.login业务结束，结果：{}","账号和密码错误！");
+            return R.fail("账号或者密码错误！");
+        }
+
+        log.info("UserServiceImpl.login业务结束，结果：{}","登录成功！");
+
+        user.setPassword(null);
+        R.ok("登录成功！",user);
+
+        return null;
     }
 }
