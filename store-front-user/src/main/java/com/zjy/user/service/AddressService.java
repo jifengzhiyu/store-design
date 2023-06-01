@@ -1,5 +1,6 @@
 package com.zjy.user.service;
 
+import com.zjy.pojo.Address;
 import com.zjy.utils.R;
 
 /**
@@ -19,4 +20,13 @@ public interface AddressService {
      * @return  com.zjy.utils.R
     */
     R list(Integer userId);
+
+    /**
+     * @description  插入地址数据，并返回
+     * @author  kaixin
+     * @date    2023/6/1 16:46
+     * @param	address 地址数据已经校验完毕
+     * @return  com.zjy.utils.R
+    */
+    R save(Address address);
 }
