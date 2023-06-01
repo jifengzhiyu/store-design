@@ -29,4 +29,13 @@ public interface AddressService {
      * @return  com.zjy.utils.R
     */
     R save(Address address);
+
+    /**
+     * @description  根据id删除地址
+     * @author  kaixin
+     * @date    2023/6/1 16:54
+     * @param	id	
+     * @return  com.zjy.utils.R
+    */
+    R remove(Integer id);
 }

@@ -69,4 +69,24 @@ public class AddressServiceImpl implements AddressService {
         //3.返回再次查询的
         return list(address.getUserId());
     }
+
+    /**
+     * @return com.zjy.utils.R
+     * @description 根据id删除地址
+     * @author kaixin
+     * @date 2023/6/1 16:54
+     * @param    id
+     */
+    @Override
+    public R remove(Integer id) {
+        int rows = addressMapper.deleteById(id);
+
+        if (rows == 0){
+            log.info("AddressserviceImpl.remove.业务结束，结果：{}","地址删除失败");
+            return R.fail("删除地址数据失败！");
+        }
+
+        log.info("AddressserviceImpl,remove.业务结束，结果：{}","地址删除成功！");
+        return R.ok("地址删除成功！");
+    }
 }

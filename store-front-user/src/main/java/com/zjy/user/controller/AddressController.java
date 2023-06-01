@@ -1,6 +1,7 @@
 package com.zjy.user.controller;
 
 import com.zjy.param.AddressListParam;
+import com.zjy.param.AddressRemoveParam;
 import com.zjy.pojo.Address;
 import com.zjy.user.service.AddressService;
 import com.zjy.utils.R;
@@ -25,6 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AddressController {
     @Autowired
     private AddressService addressService;
+
+    @PostMapping("/remove")
+    public R remove(@RequestBody @Validated AddressRemoveParam addressRemoveParam, BindingResult result){
+        if(result.hasErrors()){
+            return R.ok("参数异常，删除失败！");
+        }
+        return addressService.remove(addressRemoveParam.getId());
+    }
 
     @PostMapping("/save")
     public R save(@RequestBody @Validated Address address,BindingResult result){
