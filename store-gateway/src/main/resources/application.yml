@@ -7,7 +7,7 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**  # 访问user路径转发用户服务
-        - id: product-service # 静态资源服务的转发规则
+        - id: product-service # 商品介绍
           uri: lb://product-service #使用负载均衡,调用服务名,这是服务名
           predicates:
             - Path=/product/** # 访问product相关,转发到product服务
@@ -15,7 +15,11 @@ spring:
           uri: lb://static-service
           predicates:
             - Path=/public/**
-        - id: carousel-service # 静态资源服务的转发规则
+        - id: carousel-service # 轮播图
           uri: lb://carousel-service
           predicates:
               - Path=/carousel/**
+        - id: category-service # 访问类别
+          uri: lb://category-service
+          predicates:
+              - Path=/category/**
