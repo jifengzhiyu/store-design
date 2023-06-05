@@ -3,9 +3,11 @@ package com.zjy.product;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.zjy.clients.CategoryClient;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -18,6 +20,7 @@ import org.springframework.context.annotation.Bean;
 
 @MapperScan(basePackages = "com.zjy.product.mapper")
 @SpringBootApplication
+@EnableFeignClients(clients = {CategoryClient.class})
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class,args);
