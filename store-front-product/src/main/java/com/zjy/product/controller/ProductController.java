@@ -1,5 +1,6 @@
 package com.zjy.product.controller;
 
+import com.zjy.param.ProductHotParam;
 import com.zjy.param.ProductPromoParam;
 import com.zjy.pojo.Product;
 import com.zjy.product.service.ProductService;
@@ -26,6 +27,14 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @PostMapping("hots")
+    public R hots(@RequestBody @Validated ProductHotParam productHotParam, BindingResult result){
+        if (result.hasErrors()){
+            return R.fail("数据查询失败！");
+        }
+        return productService.hots(productHotParam);
+    }
 
     @PostMapping("/promo")
     public R promo(@RequestBody @Validated ProductPromoParam productPromoParam, BindingResult result){

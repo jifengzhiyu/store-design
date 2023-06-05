@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zjy.clients.CategoryClient;
+import com.zjy.param.ProductHotParam;
 import com.zjy.pojo.Category;
 import com.zjy.pojo.Product;
 import com.zjy.product.mapper.ProductMapper;
@@ -74,5 +75,40 @@ public class ProductServiceImpl implements ProductService {
         log.info("ProductserviceImpl.promo业务结束，结果：{}",productList);
 
         return R.ok("数据查询成功",productList);
+    }
+
+    /**
+     * @return com.zjy.utils.R
+     * @description 多类别热门商品查询根据类别名称集合！至多查询7条
+     * @author kaixin
+     * @date 2023/6/5 22:55
+     * @param    productHotParam 类别名称集合
+     */
+    @Override
+    public R hots(ProductHotParam productHotParam) {
+        R r = categoryClient.hots(productHotParam);
+
+        if (r.getCode().equals(R.FAIL_CODE)){
+            log.info("ProductserviceImpl,hots.业务结束，结果：{}",r.getMsg());
+            return r;
+        }
+
+        List<Object> ids = (List<Object>) r.getData();
+
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("category_id",ids);
+        queryWrapper.orderByDesc("product_sales");
+
+        IPage<Product> page = new Page<>(1,7);
+
+        page = productMapper.selectPage(page, queryWrapper);
+
+        List<Product> records = page.getRecords();
+
+        R ok = R.ok("多类别热门商品查询成功！", records);
+
+        log.info("ProductserviceImpl.hots业务结束，结果：{}",ok);
+
+        return ok;
     }
 }

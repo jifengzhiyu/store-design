@@ -3,12 +3,14 @@ package com.zjy.category.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjy.category.mapper.CategoryMapper;
 import com.zjy.category.service.CategoryService;
+import com.zjy.param.ProductHotParam;
 import com.zjy.pojo.Category;
 import com.zjy.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author kaixin
@@ -48,5 +50,29 @@ public class CategoryServiceImpl implements CategoryService {
 
         log.info("CategoryServiceImpl.byName.业务结束，结果：{}","类别查询成功");
         return R.ok("类别查询成功",category);
+    }
+
+    /**
+     * @return com.zjy.utils.R
+     * @description 根据传入的热门类别名称集合！返回类别对应的id集合
+     * @author kaixin
+     * @date 2023/6/5 22:42
+     * @param    productHotParam
+     */
+    @Override
+    public R hotsCategory(ProductHotParam productHotParam) {
+
+        QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.in("category_name",productHotParam.getCategoryName());
+
+        queryWrapper.select("category_id");
+
+        List<Object> ids = categoryMapper.selectObjs(queryWrapper);
+
+        R ok = R.ok("类别集合查询成功", ids);
+        log.info("CategoryServiceImpl.hotsCategory!业务结束，结果：{}",ok);
+
+        return ok;
     }
 }

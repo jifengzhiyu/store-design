@@ -1,5 +1,6 @@
 package com.zjy.category.service;
 
+import com.zjy.param.ProductHotParam;
 import com.zjy.utils.R;
 
 /**
@@ -18,4 +19,13 @@ public interface CategoryService {
       * @version 1.0
       */
      R byName(String categoryName);
+
+     /**
+      * @description  根据传入的热门类别名称集合！返回类别对应的id集合
+      * @author  kaixin
+      * @date    2023/6/5 22:42
+      * @param	productHotParam	
+      * @return  com.zjy.utils.R
+     */
+    R hotsCategory(ProductHotParam productHotParam);
 }
