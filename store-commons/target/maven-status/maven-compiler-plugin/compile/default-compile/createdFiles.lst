@@ -1,0 +1,15 @@
+com/zjy/constants/UserConstants.class
+com/zjy/pojo/Category.class
+com/zjy/param/UserLoginParam.class
+com/zjy/param/ProductPromoParam.class
+com/zjy/clients/CategoryClient.class
+com/zjy/pojo/Product.class
+com/zjy/pojo/User.class
+com/zjy/param/UserCheckParam.class
+com/zjy/pojo/Address.class
+com/zjy/param/ProductHotParam.class
+com/zjy/utils/R.class
+com/zjy/utils/MD5Util.class
+com/zjy/param/AddressRemoveParam.class
+com/zjy/pojo/Carousel.class
+com/zjy/param/AddressListParam.class

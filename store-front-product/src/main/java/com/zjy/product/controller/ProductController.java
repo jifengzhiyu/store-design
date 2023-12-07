@@ -28,6 +28,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    
+
     @PostMapping("hots")
     public R hots(@RequestBody @Validated ProductHotParam productHotParam, BindingResult result){
         if (result.hasErrors()){

@@ -24,6 +24,11 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("list")
+    public R list(){
+        return categoryService.list();
+    }
+
     /**
      * @description: 热门ID
      * @author kaixin

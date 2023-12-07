@@ -75,4 +75,18 @@ public class CategoryServiceImpl implements CategoryService {
 
         return ok;
     }
+
+    /**
+     * @return com.zjy.utils.R
+     * @description 查询类别数据，进行返回！
+     * @author kaixin
+     * @date 2023/6/9 23:39
+     */
+    @Override
+    public R list() {
+        List<Category> categoryList = categoryMapper.selectList(null);
+        R ok = R.ok("类别全部数据查询成功！", categoryList);
+        log.info("CategoryServiceImpl.list业务结束，结果：{}",ok);
+        return ok;
+    }
 }

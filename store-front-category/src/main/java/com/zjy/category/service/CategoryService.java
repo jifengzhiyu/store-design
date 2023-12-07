@@ -28,4 +28,13 @@ public interface CategoryService {
       * @return  com.zjy.utils.R
      */
     R hotsCategory(ProductHotParam productHotParam);
+
+    /**
+     * @description  查询类别数据，进行返回！
+     * @author  kaixin
+     * @date    2023/6/9 23:39
+     * @param
+     * @return  com.zjy.utils.R
+    */
+    R list();
 }
